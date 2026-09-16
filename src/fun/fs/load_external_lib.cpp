@@ -5,12 +5,12 @@
 namespace mtrs::fs
 {
 
-LibHandle load_library(const std::string& path)
+LibHandle load_library(const char *path)
 {
 #if defined(_WIN32)
-    return LoadLibraryA(path.c_str());
+    return LoadLibraryA(path);
 #else
-    return dlopen(path.c_str(), RTLD_NOW | RTLD_LOCAL);
+    return dlopen(path, RTLD_NOW | RTLD_LOCAL);
 #endif
 }
 
@@ -24,12 +24,12 @@ void free_library(LibHandle handle)
 #endif
 }
 
-void* get_symbol(LibHandle handle, const std::string& name)
+void* get_symbol(LibHandle handle, const char *name)
 {
 #if defined(_WIN32)
-    return reinterpret_cast<void*>(GetProcAddress(handle, name.c_str()));
+    return reinterpret_cast<void*>(GetProcAddress(handle, name));
 #else
-    return dlsym(handle, name.c_str());
+    return dlsym(handle, name);
 #endif
 }
 

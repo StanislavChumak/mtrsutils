@@ -1,8 +1,6 @@
 #ifndef LOAD_EXTERNAL_LIB_HPP
 #define LOAD_EXTERNAL_LIB_HPP
 
-#include <string>
-
 #if defined(_WIN32)
     #include <windows.h>
     #define EXPORT __declspec(dllexport)
@@ -20,9 +18,9 @@ namespace mtrs::fs
     using LibHandle = void*;
 #endif
 
-LibHandle load_library(const std::string& path);
+LibHandle load_library(const char *path);
 void free_library(LibHandle handle);
-void* get_symbol(LibHandle handle, const std::string& name);
+void* get_symbol(LibHandle handle, const char *name);
 const char* get_last_error();
 
 constexpr const char* lib_extension()
