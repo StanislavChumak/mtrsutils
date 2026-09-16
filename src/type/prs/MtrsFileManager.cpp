@@ -163,7 +163,7 @@ void MtrsFileManager::read_file(const std::string &path, MtrsFileManager::MtrsFi
                 read(component_id, data, cur);
                 switch (component_id)
                 {
-#define X(Comp) case math::hash64(#Comp): {\
+#define X(Comp) case math::hash64_(#Comp): {\
     size_t comp_pos = cur;\
     Comp comp; std::memcpy(&comp, data + comp_pos, sizeof(comp)); cur = comp_pos + sizeof(comp);\
     for(auto field : comp.get_deferred_fields())\
@@ -191,7 +191,7 @@ void MtrsFileManager::read_file(const std::string &path, MtrsFileManager::MtrsFi
                 read(res_id, data, cur);
                 switch (group_id)
                 {
-#define X(Res) case math::hash64(#Res): {\
+#define X(Res) case math::hash64_(#Res): {\
     size_t res_pos = cur;\
     Res res; std::memcpy(&res, data + res_pos, sizeof(res)); cur = res_pos + sizeof(res);\
     for(auto field : res.get_deferred_fields())\

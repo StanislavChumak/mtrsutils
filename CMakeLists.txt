@@ -15,6 +15,8 @@ add_library(${LIB_NAME} STATIC
 src/fun/fs/get_folder.cpp
 src/fun/fs/load_external_lib.cpp
 
+src/fun/math/hash.cpp
+
 src/fun/msg/mtrs_message.cpp
 
 src/fun/str/string_optimizer.cpp
