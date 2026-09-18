@@ -28,6 +28,10 @@ src/type/prs/DeferredData.cpp
 
 )
 
+target_compile_definitions(${LIB_NAME} PRIVATE
+    $<$<CONFIG:Release>:FLAG_RELEASE>
+)
+
 target_include_directories(${LIB_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )

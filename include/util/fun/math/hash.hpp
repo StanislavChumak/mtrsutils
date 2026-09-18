@@ -18,15 +18,15 @@ namespace mtrs::math
 
 namespace detail
 {
-    uint64_t save_hash64_to_map(std::string str, uint64_t hash);
     uint32_t save_hash32_to_map(std::string str, uint32_t hash);
+    uint64_t save_hash64_to_map(std::string str, uint64_t hash);
 }
 
-std::string rehash64(uint64_t hash);
 std::string rehash32(uint32_t hash);
+std::string rehash64(uint64_t hash);
 
 #define HASH_SPECIFER inline
-#elif
+#else
 #define HASH_SPECIFER constexpr
 #endif
 
@@ -60,7 +60,7 @@ HASH_SPECIFER uint32_t hash32(const void *data, size_t size, uint32_t seed = FNV
 #ifndef FLAG_RELEASE
     uint32_t hash = fnv1a<uint32_t>(static_cast<const char*>(data), size, seed, FNV_PRIME_32);
     return detail::save_hash32_to_map("data with size:" + std::to_string(size), hash);
-#elif
+#else
     return fnv1a<uint32_t>(static_cast<const char*>(data), size, seed, FNV_PRIME_32);
 #endif
 }
@@ -70,7 +70,7 @@ HASH_SPECIFER uint64_t hash64(const void *data, size_t size, uint64_t seed = FNV
 #ifndef FLAG_RELEASE
     uint32_t hash = fnv1a<uint32_t>(static_cast<const char*>(data), size, seed, FNV_PRIME_32);
     return detail::save_hash32_to_map("data with size:" + std::to_string(size), hash);
-#elif
+#else
     return fnv1a<uint32_t>(static_cast<const char*>(data), size, seed, FNV_PRIME_32);
 #endif
 }
@@ -82,7 +82,7 @@ HASH_SPECIFER uint32_t hash32(const char *str, uint32_t seed = FNV_OFFSET_BASIS_
 #ifndef FLAG_RELEASE
     uint32_t hash = fnv1a<uint32_t>(str, i, seed, FNV_PRIME_32);
     return detail::save_hash32_to_map(str, hash);
-#elif
+#else
     return fnv1a<uint32_t>(str, i, seed, FNV_PRIME_32);
 #endif
 }
@@ -94,7 +94,7 @@ HASH_SPECIFER uint64_t hash64(const char *str, uint64_t seed = FNV_OFFSET_BASIS_
 #ifndef FLAG_RELEASE
     uint64_t hash = fnv1a<uint64_t>(str, i, seed, FNV_PRIME_64);
     return detail::save_hash64_to_map(str, hash);
-#elif
+#else
     return fnv1a<uint64_t>(str, i, seed, FNV_PRIME_64);
 #endif
 }

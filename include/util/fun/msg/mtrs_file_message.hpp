@@ -1,6 +1,5 @@
 #ifndef MTRS_FILE_MESSAGE_HPP
 #define MTRS_FILE_MESSAGE_HPP
-#ifndef FLAG_RELEASE
 
 #include "util/fun/msg/mtrs_message.hpp"
 
@@ -44,5 +43,4 @@ void variable_message(size_t offset, std::string name, T var)
 
 }
 
-#endif
 #endif

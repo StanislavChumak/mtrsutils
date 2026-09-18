@@ -16,7 +16,7 @@ uint32_t hash32(const std::string& str, uint32_t seed)
     uint32_t hash = fnv1a<uint32_t>(str.data(), str.size(), seed, FNV_PRIME_32);
     detail::save_hash32_to_map(str, hash);
     return hash;
-#elif
+#else
     return fnv1a<uint32_t>(str.data(), str.size(), seed, FNV_PRIME_32);
 #endif
 }
@@ -27,7 +27,7 @@ uint64_t hash64(const std::string& str, uint64_t seed)
     uint64_t hash = fnv1a<uint64_t>(str.data(), str.size(), seed, FNV_PRIME_64);
     detail::save_hash64_to_map(str, hash);
     return hash;
-#elif
+#else
     return fnv1a<uint64_t>(str.data(), str.size(), seed, FNV_PRIME_64);
 #endif
 }
@@ -64,8 +64,7 @@ std::string rehash32(uint32_t hash)
     auto it = map32.find(hash);
     if(it == map32.end())
     {
-        msg::mtrs_warning("map32 does not contain hash <", hash, '"');
-        return "null";
+        return "null<" + std::to_string(hash) + '>';
     }
     return it->second;
 }
@@ -75,8 +74,7 @@ std::string rehash64(uint64_t hash)
     auto it = map64.find(hash);
     if(it == map64.end())
     {
-        msg::mtrs_warning("map64 does not contain hash <", hash, '"');
-        return "null";
+        return "null<" + std::to_string(hash) + '>';
     }
     return it->second;
 }

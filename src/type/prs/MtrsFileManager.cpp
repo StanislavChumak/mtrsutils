@@ -145,19 +145,19 @@ void MtrsFileManager::read_file(const std::string &path, MtrsFileManager::MtrsFi
     {
         size_t cur = 16;
 
-        uint32_t entity_count, data_offset, dynamic_offset;
+        uint32_t entity_count, data_offset, ddata_offset;
         read(entity_count, data, cur);
         read(data_offset, data, cur);
-        read(dynamic_offset, data, cur);
+        read(ddata_offset, data, cur);
 
         cur = data_offset;
         uint64_t entity_id, entity_end;
-        while(cur < dynamic_offset && cur < file.data.size())
+        while(cur < ddata_offset && cur < file.data.size())
         {
             read(entity_id, data, cur);
             read(entity_end, data, cur);
 
-            while(cur < entity_end && cur < dynamic_offset)
+            while(cur < entity_end && cur < ddata_offset)
             {
                 uint64_t component_id;
                 read(component_id, data, cur);
@@ -239,13 +239,13 @@ void MtrsFileManager::clear_file(const std::string &path, MtrsFileManager::MtrsF
                 std::memcpy(&base, data + 24, sizeof(uint32_t));
             }
 
-            size_t dynamic_size = 0;
+            size_t ddata_size = 0;
             for(auto &ddata : file.deferred_data)
             {
-                dynamic_size += ddata.second.field[1];
+                ddata_size += ddata.second.field[1];
             }
 
-            std::vector<char> out(static_cast<size_t>(base) + dynamic_size);
+            std::vector<char> out(static_cast<size_t>(base) + ddata_size);
             std::memcpy(out.data(), data, base);
 
             uint32_t offset = base;

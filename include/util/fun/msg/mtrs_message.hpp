@@ -1,6 +1,5 @@
 #ifndef MTRS_MESSAGE_HPP
 #define MTRS_MESSAGE_HPP
-#ifndef FLAG_RELEASE
 
 #include <sstream>
 
@@ -72,5 +71,4 @@ void mtrs_error(Args&&... args)
 
 }
 
-#endif
 #endif

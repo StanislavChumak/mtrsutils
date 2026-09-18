@@ -1,5 +1,4 @@
 #include "util/fun/msg/mtrs_message.hpp"
-
 #include <iostream>
 
 namespace mtrs::msg
