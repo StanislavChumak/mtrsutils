@@ -39,6 +39,14 @@ public:
     }
 
     template <typename Field>
+    Field &change_field(Field T::*member)
+    {
+        this->_dirty = true;
+        this->notify_observers();
+        return this->_value.*member;
+    }
+
+    template <typename Field>
     const Field& get_field(Field T::*member) const
     {
         return this->_value.*member;
