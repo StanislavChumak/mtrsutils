@@ -19,11 +19,11 @@ std::unordered_set<std::string> get_files_from_folder(const std::string &dirPath
             stdfs::path p = entry.path();
             if (entry.is_directory())
             {
-                files.merge(get_files_from_folder(p, extension));
+                files.merge(get_files_from_folder(p.generic_string(), extension));
             }
             else if (entry.is_regular_file() && p.extension() == extension)
             {
-                files.emplace(p);
+                files.emplace(p.generic_string());
             }
         }
     }

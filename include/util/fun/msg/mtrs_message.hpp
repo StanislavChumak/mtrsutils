@@ -3,6 +3,12 @@
 
 #include <sstream>
 
+// windows.h (pulled in transitively) defines ERROR as a macro, which would
+// clash with the TypeMessage::ERROR enumerator below.
+#ifdef ERROR
+    #undef ERROR
+#endif
+
 #define TYPE_MESSAGE \
 X(ERROR) \
 X(WARNING) \

@@ -2,6 +2,12 @@
 #define LOAD_EXTERNAL_LIB_HPP
 
 #if defined(_WIN32)
+    #ifndef WIN32_LEAN_AND_MEAN
+        #define WIN32_LEAN_AND_MEAN
+    #endif
+    #ifndef NOMINMAX
+        #define NOMINMAX
+    #endif
     #include <windows.h>
     #define EXPORT __declspec(dllexport)
 #else
